@@ -19,9 +19,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query, table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(201).json({"Error" : false, "Message" : "User Added!"});
+                res.status(201).json({"Message" : "User Added!"});
             }
         });
     });
@@ -33,9 +33,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query, table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(200).json({"Error" : false, "Message" : "Success", "Users" : rows});
+                res.status(200).json({"Message" : "Success", "Users" : rows});
             }
         });
     });
@@ -47,9 +47,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query,table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(200).json({"Error" : false, "Message" : "Success", "User" : rows});
+                res.status(200).json({"Message" : "Success", "User" : rows});
             }
         });
     });
@@ -62,9 +62,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query, table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(201).json({"Error" : false, "Message" : "Product Added!"});
+                res.status(201).json({"Message" : "Product Added!"});
             }
         });
     });
@@ -75,9 +75,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query, table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(200).json({"Error" : false, "Message" : "Success", "Products" : rows});
+                res.status(200).json({"Message" : "Success", "Products" : rows});
             }
         });
     });
@@ -89,9 +89,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query,table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(200).json({"Error" : false, "Message" : "Success", "Product" : rows});
+                res.status(200).json({"Message" : "Success", "Product" : rows});
             }
         });
     });
@@ -104,9 +104,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query, table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(201).json({"Error" : false, "Message" : "Unit Added!"});
+                res.status(201).json({"Message" : "Unit Added!"});
             }
         });
     });
@@ -117,9 +117,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query, table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(200).json({"Error" : false, "Message" : "Success", "Units" : rows});
+                res.status(200).json({"Message" : "Success", "Units" : rows});
             }
         });
     });
@@ -131,9 +131,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query,table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(200).json({"Error" : false, "Message" : "Success", "Unit" : rows});
+                res.status(200).json({"Message" : "Success", "Unit" : rows});
             }
         });
     });
@@ -146,9 +146,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query, table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(201).json({"Error" : false, "Message" : "Activity Added!"});
+                res.status(201).json({"Message" : "Activity Added!"});
             }
         });
     });
@@ -159,9 +159,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query, table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(200).json({"Error" : false, "Message" : "Success", "Activities" : rows});
+                res.status(200).json({"Message" : "Success", "Activities" : rows});
             }
         });
     });
@@ -173,9 +173,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query,table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(200).json({"Error" : false, "Message" : "Success", "Activity" : rows});
+                res.status(200).json({"Message" : "Success", "Activity" : rows});
             }
         });
     });
@@ -188,36 +188,98 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection, md5) {
         query = mysql.format(query, table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(201).json({"Error" : false, "Message" : "Record Added!"});
+                res.status(201).json({"Message" : "Record Added!"});
             }
         });
     });
 // GET ALL RECORDS
     router.get("/records", function(req, res) {
-        var query = "SELECT * FROM ??";
+        var query = "SELECT *, "
+        + "(SELECT COUNT(score) FROM Record) score_count, (SELECT SUM(score) FROM Record WHERE attempt_run = 1) first_attempt_score_sum, "
+        + "(SELECT AVG(score) FROM Record) average_attempt_score_sum, (SELECT MAX(score) FROM Record) highest_attempt_score_sum, "
+        + "(SELECT SUM(score) FROM Record WHERE attempt_run = (SELECT MAX(attempt_run) FROM Record)) last_attempt_score_sum FROM ??";
         var table = ["Record"];
         query = mysql.format(query, table);
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(200).json({"Error" : false, "Message" : "Success", "Records" : rows});
+                res.status(200).json({"Message" : "Success", "Records" : rows});
             }
         });
     });
 
-// GET RECORD BY ID
-    router.get("/records/:record_id", function(req, res) {
-        var query = "SELECT * FROM ?? WHERE ??=?";
-        var table = ["Record","record_id", req.params.record_id];
-        query = mysql.format(query,table);
+// AGGREGATE
+// GET RECORDS BY USER_ID
+    router.get("/records/users/:user_id", function(req, res) {
+        var query = "SELECT *, "
+        + "(SELECT COUNT(score) FROM Record WHERE user_id = " + req.params.user_id + ") score_count, "
+        + "(SELECT SUM(score) FROM Record WHERE user_id = " + req.params.user_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE user_id = " + req.params.user_id + "))/100 first_attempt_score, "
+        + "(SELECT AVG(score) FROM Record WHERE user_id = " + req.params.user_id + ")/100 average_attempt_score, "
+        + "(SELECT MAX(score) FROM Record WHERE user_id = " + req.params.user_id + ")/100 highest_attempt_score, "
+        + "(SELECT SUM(score) FROM Record WHERE user_id = " + req.params.user_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE user_id = " + req.params.user_id + "))/100 last_attempt_score "
+        + "FROM Record WHERE user_id = " + req.params.user_id;
         connection.query(query, function(err, rows) {
             if(err) {
-                res.status(400).json({"Error" : true, "Message" : "Error executing MySQL query"});
+                res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
-                res.status(200).json({"Error" : false, "Message" : "Success", "Record" : rows});
+                res.status(200).json({"Message" : "Success", "Record" : rows});
+            }
+        });
+    });
+
+// GET RECORDS BY ACTIVITY_ID
+    router.get("/records/activities/:activity_id", function(req, res) {
+        var query = "SELECT *, "
+        + "(SELECT COUNT(score) FROM Record WHERE activity_id = " + req.params.activity_id + ") score_count, "
+        + "(SELECT SUM(score) FROM Record WHERE activity_id = " + req.params.activity_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE activity_id = " + req.params.activity_id + "))/100 first_attempt_score, "
+        + "(SELECT AVG(score) FROM Record WHERE activity_id = " + req.params.activity_id + ")/100 average_attempt_score, "
+        + "(SELECT MAX(score) FROM Record WHERE activity_id = " + req.params.activity_id + ")/100 highest_attempt_score, "
+        + "(SELECT SUM(score) FROM Record WHERE activity_id = " + req.params.activity_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE activity_id = " + req.params.activity_id + "))/100 last_attempt_score "
+        + "FROM Record WHERE activity_id = " + req.params.activity_id;
+        connection.query(query, function(err, rows) {
+            if(err) {
+                res.status(400).json({"Message" : "Error executing MySQL query"});
+            } else {
+                res.status(200).json({"Message" : "Success", "Record" : rows});
+            }
+        });
+    });
+
+// GET RECORDS BY PRODUCT_ID
+    router.get("/records/products/:product_id", function(req, res) {
+        var query = "SELECT *, "
+        + "(SELECT COUNT(score) FROM Record WHERE product_id = " + req.params.product_id + ") score_count, "
+        + "(SELECT SUM(score) FROM Record WHERE product_id = " + req.params.product_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE product_id = " + req.params.product_id + "))/100 first_attempt_score, "
+        + "(SELECT AVG(score) FROM Record WHERE product_id = " + req.params.product_id + ")/100 average_attempt_score, "
+        + "(SELECT MAX(score) FROM Record WHERE product_id = " + req.params.product_id + ")/100 highest_attempt_score, "
+        + "(SELECT SUM(score) FROM Record WHERE product_id = " + req.params.product_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE product_id = " + req.params.product_id + "))/100 last_attempt_score "
+        + "FROM Record WHERE product_id = " + req.params.product_id;
+        connection.query(query, function(err, rows) {
+            if(err) {
+                res.status(400).json({"Message" : "Error executing MySQL query"});
+            } else {
+                res.status(200).json({"Message" : "Success", "Record" : rows});
+            }
+        });
+    });
+
+// GET RECORDS BY UNIT_ID
+    router.get("/records/units/:unit_id", function(req, res) {
+        var query = "SELECT *, "
+        + "(SELECT COUNT(score) FROM Record WHERE unit_id = " + req.params.unit_id + ") score_count, "
+        + "(SELECT SUM(score) FROM Record WHERE unit_id = " + req.params.unit_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE unit_id = " + req.params.unit_id + "))/100 first_attempt_score, "
+        + "(SELECT AVG(score) FROM Record WHERE unit_id = " + req.params.unit_id + ")/100 average_attempt_score, "
+        + "(SELECT MAX(score) FROM Record WHERE unit_id = " + req.params.unit_id + ")/100 highest_attempt_score, "
+        + "(SELECT SUM(score) FROM Record WHERE unit_id = " + req.params.unit_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE unit_id = " + req.params.unit_id + "))/100 last_attempt_score "
+        + "FROM Record WHERE unit_id = " + req.params.unit_id;
+        connection.query(query, function(err, rows) {
+            if(err) {
+                res.status(400).json({"Message" : "Error executing MySQL query"});
+            } else {
+                res.status(200).json({"Message" : "Success", "Record" : rows});
             }
         });
     });
