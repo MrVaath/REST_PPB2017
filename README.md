@@ -3,7 +3,7 @@
 
 A project created for the PPB2017
 
-## Instalacja
+## Installation
 ```
 [Node v7.x] (https://nodejs.org/en/)
 ```
@@ -12,19 +12,20 @@ A project created for the PPB2017
 ```
 ```
 $ git clone git@github.com:MrVaath/REST_PPB2017.git
-$ cd REST_PPB2017
+$ cd REST_PPB2017\Server 1
 $ npm install
-$ cd ..
+$ cd ..\Server2
+$ npm install
 ```
 
-## Użycie
+## Usage
 
 * Start server
 `$ npm start`
 
 > SERVER: localhost:3000
 
-## Zasoby
+## Resources
 
 ### RECORDS
 
@@ -38,23 +39,23 @@ $ cd ..
 ### ACTIVITIES
 
 * GET `/api/activities` : Get all activities
-* GET `/api/activities/:id` : Get activities by activity_id
+* GET `/api/activities/:id` : Get activity by activity_id
 * POST `/api/activities` : Add activity
 
 ### PRODUCTS
 
 * GET `/api/products` : Get all products
-* GET `/api/products/:id` : Get products by product_id
+* GET `/api/products/:id` : Get product by product_id
 * POST `/api/products` : Add product
 
 ### UNITS
 
 * GET `/api/units` : Get all units
-* GET `/api/units/:id` : Get units by unit_id
+* GET `/api/units/:id` : Get unit by unit_id
 * POST `/api/units` : Add unit
 
 ### USERS
 
 * GET `/api/users` : Get all users
-* GET `/api/users/:id` : Get users by user_id
+* GET `/api/users/:id` : Get user by user_id
 * POST `/api/users` : Add user

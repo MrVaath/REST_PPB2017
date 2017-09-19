@@ -182,18 +182,19 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 
 ///////// RECORD /////////
 // POST
-    router.post("/records", function(req, res) {
-        var query = "INSERT INTO ??(??, ??, ??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        var table = ["Record", "product_id", "unit_id", "activity_id", "user_id", "attempt_run", "time_on_activity_duration", "score", req.body.product, req.body.unit, req.body.activity, req.body.user, req.body.attempt, req.body.duration, req.body.score];
-        query = mysql.format(query, table);
-        connection.query(query, function(err, rows) {
-            if(err) {
-                res.status(400).json({"Message" : "Error executing MySQL query"});
-            } else {
-                res.status(201).json({"Message" : "Record Added!"});
-            }
-        });
-    });
+    // router.post("/records", function(req, res) {
+    //     var query = "INSERT INTO Record (product_id, unit_id, activity_id, user_id, attempt_run, time_on_activity_duration, score) VALUES ("req.body.product", "req.body.unit", "req.body.activity", "req.body.user", "req.body.attempt", "req.body.duration", "req.body.score"), "
+    //     + "INSERT INTO Aggregate (user_id, activity_id, product_id, unit_id, score_count, first_attempt_score, average_attempt_score, highest_attempt_score, last_attempt_score) "
+    //     + "VALUES ("req.body.user", "req.body.activity", "req.body.product", "req.body.unit", (SELECT))";
+    //     query = mysql.format(query, table);
+    //     connection.query(query, function(err, rows) {
+    //         if(err) {
+    //             res.status(400).json({"Message" : "Error executing MySQL query"});
+    //         } else {
+    //             res.status(201).json({"Message" : "Record Added!"});
+    //         }
+    //     });
+    // });
 // GET ALL RECORDS
     router.get("/records", function(req, res) {
         var query = "SELECT *, "
@@ -214,13 +215,7 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 // AGGREGATE
 // GET RECORDS BY USER_ID
     router.get("/records/users/:user_id", function(req, res) {
-        var query = "SELECT *, "
-        + "(SELECT COUNT(score) FROM Record WHERE user_id = " + req.params.user_id + ") score_count, "
-        + "(SELECT SUM(score) FROM Record WHERE user_id = " + req.params.user_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE user_id = " + req.params.user_id + "))/100 first_attempt_score, "
-        + "(SELECT AVG(score) FROM Record WHERE user_id = " + req.params.user_id + ")/100 average_attempt_score, "
-        + "(SELECT MAX(score) FROM Record WHERE user_id = " + req.params.user_id + ")/100 highest_attempt_score, "
-        + "(SELECT SUM(score) FROM Record WHERE user_id = " + req.params.user_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE user_id = " + req.params.user_id + "))/100 last_attempt_score "
-        + "FROM Record WHERE user_id = " + req.params.user_id;
+        var query = "SELECT * FROM Aggregate WHERE user_id = " + req.params.user_id;
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -232,13 +227,7 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 
 // GET RECORDS BY ACTIVITY_ID
     router.get("/records/activities/:activity_id", function(req, res) {
-        var query = "SELECT *, "
-        + "(SELECT COUNT(score) FROM Record WHERE activity_id = " + req.params.activity_id + ") score_count, "
-        + "(SELECT SUM(score) FROM Record WHERE activity_id = " + req.params.activity_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE activity_id = " + req.params.activity_id + "))/100 first_attempt_score, "
-        + "(SELECT AVG(score) FROM Record WHERE activity_id = " + req.params.activity_id + ")/100 average_attempt_score, "
-        + "(SELECT MAX(score) FROM Record WHERE activity_id = " + req.params.activity_id + ")/100 highest_attempt_score, "
-        + "(SELECT SUM(score) FROM Record WHERE activity_id = " + req.params.activity_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE activity_id = " + req.params.activity_id + "))/100 last_attempt_score "
-        + "FROM Record WHERE activity_id = " + req.params.activity_id;
+        var query = "SELECT * FROM Aggregate WHERE activity_id = " + req.params.activity_id;
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -250,13 +239,7 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 
 // GET RECORDS BY PRODUCT_ID
     router.get("/records/products/:product_id", function(req, res) {
-        var query = "SELECT *, "
-        + "(SELECT COUNT(score) FROM Record WHERE product_id = " + req.params.product_id + ") score_count, "
-        + "(SELECT SUM(score) FROM Record WHERE product_id = " + req.params.product_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE product_id = " + req.params.product_id + "))/100 first_attempt_score, "
-        + "(SELECT AVG(score) FROM Record WHERE product_id = " + req.params.product_id + ")/100 average_attempt_score, "
-        + "(SELECT MAX(score) FROM Record WHERE product_id = " + req.params.product_id + ")/100 highest_attempt_score, "
-        + "(SELECT SUM(score) FROM Record WHERE product_id = " + req.params.product_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE product_id = " + req.params.product_id + "))/100 last_attempt_score "
-        + "FROM Record WHERE product_id = " + req.params.product_id;
+        var query = "SELECT * FROM Aggregate WHERE product_id = " + req.params.product_id;
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -268,13 +251,7 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 
 // GET RECORDS BY UNIT_ID
     router.get("/records/units/:unit_id", function(req, res) {
-        var query = "SELECT *, "
-        + "(SELECT COUNT(score) FROM Record WHERE unit_id = " + req.params.unit_id + ") score_count, "
-        + "(SELECT SUM(score) FROM Record WHERE unit_id = " + req.params.unit_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE unit_id = " + req.params.unit_id + "))/100 first_attempt_score, "
-        + "(SELECT AVG(score) FROM Record WHERE unit_id = " + req.params.unit_id + ")/100 average_attempt_score, "
-        + "(SELECT MAX(score) FROM Record WHERE unit_id = " + req.params.unit_id + ")/100 highest_attempt_score, "
-        + "(SELECT SUM(score) FROM Record WHERE unit_id = " + req.params.unit_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE unit_id = " + req.params.unit_id + "))/100 last_attempt_score "
-        + "FROM Record WHERE unit_id = " + req.params.unit_id;
+        var query = "SELECT * FROM Aggregate WHERE unit_id = " + req.params.unit_id;
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
