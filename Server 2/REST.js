@@ -180,29 +180,38 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
         });
     });
 
-///////// RECORD /////////
-// POST
-    // router.post("/records", function(req, res) {
-    //     var query = "INSERT INTO Record (product_id, unit_id, activity_id, user_id, attempt_run, time_on_activity_duration, score) VALUES ("req.body.product", "req.body.unit", "req.body.activity", "req.body.user", "req.body.attempt", "req.body.duration", "req.body.score"), "
-    //     + "INSERT INTO Aggregate (user_id, activity_id, product_id, unit_id, score_count, first_attempt_score, average_attempt_score, highest_attempt_score, last_attempt_score) "
-    //     + "VALUES ("req.body.user", "req.body.activity", "req.body.product", "req.body.unit", (SELECT))";
-    //     query = mysql.format(query, table);
-    //     connection.query(query, function(err, rows) {
-    //         if(err) {
-    //             res.status(400).json({"Message" : "Error executing MySQL query"});
-    //         } else {
-    //             res.status(201).json({"Message" : "Record Added!"});
-    //         }
-    //     });
-    // });
+/////// RECORD /////////
+// POST RECORD
+    router.post("/records", function(req, res) {
+        var user =      req.body.user,
+            product =   req.body.product,
+            unit =      req.body.unit,
+            activity =  req.body.activity,
+            attempt =   req.body.attempt,
+            duration =  req.body.duration,
+            score =     req.body.score;
+
+        //INSERT INTO Record
+        var query1 = "INSERT INTO Record (product_id, unit_id, activity_id, user_id, attempt_run, time_on_activity_duration, score) VALUES(" + product + ", " + unit + ", " + activity + ", "  + user + ", " + attempt + ", " + duration + ", " + score + ");\n";
+
+        //INSERT INTO Aggregate
+        var query2 = "INSERT INTO Aggregate (user_id, product_id, unit_id, activity_id, time_on_activity_duration, score_count, first_attempt_score, average_attempt_score, highest_attempt_score, last_attempt_score) VALUES(" + user + ", " + product + ", " + unit + ", " + activity + ", " + duration + ", " + score + ", " + score + ", " + score + ", " + score + ", " + score + ") ON DUPLICATE KEY UPDATE time_on_activity_duration = time_on_activity_duration + VALUES(time_on_activity_duration), score_count =  VALUES(score_count) + score_count, first_attempt_score = first_attempt_score, average_attempt_score = (score_count / " + attempt + "), highest_attempt_score = IF(highest_attempt_score < VALUES(highest_attempt_score), VALUES(highest_attempt_score), highest_attempt_score), last_attempt_score =  VALUES(last_attempt_score);\n";
+            
+        query = query1 + query2;
+        console.log(query);
+        
+        connection.query(query, function(err, rows) {
+            if(err) {
+                console.log(err);
+                res.status(400).json({"Message" : "Error executing MySQL query"});
+            } else {
+                res.status(201).json({"Message" : "Record Added!"});
+            }
+        });
+    });
 // GET ALL RECORDS
     router.get("/records", function(req, res) {
-        var query = "SELECT *, "
-        + "(SELECT COUNT(score) FROM Record) score_count, (SELECT SUM(score) FROM Record WHERE attempt_run = 1) first_attempt_score, "
-        + "(SELECT AVG(score) FROM Record) average_attempt_score, (SELECT MAX(score) FROM Record) highest_attempt_score, "
-        + "(SELECT SUM(score) FROM Record WHERE attempt_run = (SELECT MAX(attempt_run) FROM Record)) last_attempt_score FROM ??";
-        var table = ["Record"];
-        query = mysql.format(query, table);
+        var query = "SELECT * FROM Aggregate";
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
