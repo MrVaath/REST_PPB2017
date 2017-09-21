@@ -230,6 +230,60 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
         });
     });
 
+// GET RECORDS BY USER_ID AND PRODUCT_ID
+    router.get("/records/users/:user_id/products/:product_id", function(req, res) {
+        var query = "SELECT *, "
+        + "(SELECT COUNT(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + ") score_count, "
+        + "(SELECT SUM(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + "))/100 first_attempt_score, "
+        + "(SELECT AVG(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + ")/100 average_attempt_score, "
+        + "(SELECT MAX(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + ")/100 highest_attempt_score, "
+        + "(SELECT SUM(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + "))/100 last_attempt_score "
+        + "FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id;
+        connection.query(query, function(err, rows) {
+            if(err) {
+                res.status(400).json({"Message" : "Error executing MySQL query"});
+            } else {
+                res.status(200).json({"Message" : "Success", "Record" : rows});
+            }
+        });
+    });
+
+// GET RECORDS BY USER_ID, PRODUCT_ID AND UNIT_ID
+    router.get("/records/users/:user_id/products/:product_id/units/:unit_id", function(req, res) {
+        var query = "SELECT *, "
+        + "(SELECT COUNT(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + ") score_count, "
+        + "(SELECT SUM(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + "))/100 first_attempt_score, "
+        + "(SELECT AVG(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + ")/100 average_attempt_score, "
+        + "(SELECT MAX(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + ")/100 highest_attempt_score, "
+        + "(SELECT SUM(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + "))/100 last_attempt_score "
+        + "FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id;
+        connection.query(query, function(err, rows) {
+            if(err) {
+                res.status(400).json({"Message" : "Error executing MySQL query"});
+            } else {
+                res.status(200).json({"Message" : "Success", "Record" : rows});
+            }
+        });
+    });
+
+// GET RECORDS BY USER_ID, PRODUCT_ID, UNIT_ID AND ACTIVITY_ID
+    router.get("/records/users/:user_id/products/:product_id/units/:unit_id/activities/:activity_id", function(req, res) {
+        var query = "SELECT *, "
+        + "(SELECT COUNT(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + " AND activity_id = " + req.params.activity_id + ") score_count, "
+        + "(SELECT SUM(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + " AND activity_id = " + req.params.activity_id + " AND attempt_run = (SELECT MIN(attempt_run) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + " AND activity_id = " + req.params.activity_id + "))/100 first_attempt_score, "
+        + "(SELECT AVG(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + " AND activity_id = " + req.params.activity_id + ")/100 average_attempt_score, "
+        + "(SELECT MAX(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + " AND activity_id = " + req.params.activity_id + ")/100 highest_attempt_score, "
+        + "(SELECT SUM(score) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + " AND activity_id = " + req.params.activity_id + " AND attempt_run = (SELECT MAX(attempt_run) FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + " AND activity_id = " + req.params.activity_id + "))/100 last_attempt_score "
+        + "FROM Record WHERE user_id = " + req.params.user_id + " AND product_id = " + req.params.product_id + " AND unit_id = " + req.params.unit_id + " AND activity_id = " + req.params.activity_id;
+        connection.query(query, function(err, rows) {
+            if(err) {
+                res.status(400).json({"Message" : "Error executing MySQL query"});
+            } else {
+                res.status(200).json({"Message" : "Success", "Record" : rows});
+            }
+        });
+    });
+
 // GET RECORDS BY ACTIVITY_ID
     router.get("/records/activities/:activity_id", function(req, res) {
         var query = "SELECT *, "
