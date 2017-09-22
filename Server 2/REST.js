@@ -4,7 +4,7 @@ function REST_ROUTER(router, connection) {
     self.handleRoutes(router, connection);
 }
 
-REST_ROUTER.prototype.handleRoutes= function(router, connection) {
+REST_ROUTER.prototype.handleRoutes = function(router, connection) {
 
 // GET
     router.get("/", function(req, res) {
@@ -14,9 +14,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 ///////// USER /////////
 // POST
     router.post("/users", function(req, res) {
-        var query = "INSERT INTO ??(??) VALUES (?)";
-        var table = ["User", "user_id", req.body.user];
-        query = mysql.format(query, table);
+        var user = req.body.user;
+        var query = "INSERT INTO User (user_id) VALUES (" + user + ")";
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -28,9 +28,8 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 
 // GET ALL USERS
     router.get("/users", function(req, res) {
-        var query = "SELECT * FROM ??";
-        var table = ["User"];
-        query = mysql.format(query, table);
+        var query = "SELECT * FROM User";
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -42,9 +41,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 
 // GET USER BY ID
     router.get("/users/:user_id", function(req, res) {
-        var query = "SELECT * FROM ?? WHERE ??=?";
-        var table = ["User", "user_id", req.params.user_id];
-        query = mysql.format(query, table);
+        var user = req.params.user_id;
+        var query = "SELECT * FROM User WHERE user_id = " + user;
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -57,9 +56,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 ///////// PRODUCT /////////
 // POST
     router.post("/products", function(req, res) {
-        var query = "INSERT INTO ??(??) VALUES (?)";
-        var table = ["Product", "product_id", req.body.product];
-        query = mysql.format(query, table);
+        var product = req.body.product;
+        var query = "INSERT INTO Product (product_id) VALUES (" + product + ")";
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -68,11 +67,11 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
             }
         });
     });
+
 // GET ALL PRODUCTS
     router.get("/products", function(req, res) {
-        var query = "SELECT * FROM ??";
-        var table = ["Product"];
-        query = mysql.format(query, table);
+        var query = "SELECT * FROM Product";
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -84,9 +83,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 
 // GET PRODUCT BY ID
     router.get("/products/:product_id", function(req, res) {
-        var query = "SELECT * FROM ?? WHERE ??=?";
-        var table = ["Product", "product_id", req.params.product_id];
-        query = mysql.format(query, table);
+        var product = req.params.product_id;
+        var query = "SELECT * FROM Product WHERE product_id = " + product;
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -99,9 +98,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 ///////// UNIT /////////
 // POST
     router.post("/units", function(req, res) {
-        var query = "INSERT INTO ??(??) VALUES (?)";
-        var table = ["Unit", "unit_id", req.body.unit];
-        query = mysql.format(query, table);
+        var unit = req.body.unit;
+        var query = "INSERT INTO Unit (unit_id) VALUES (" + unit + ")";
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -110,11 +109,11 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
             }
         });
     });
+
 // GET ALL UNITS
     router.get("/units", function(req, res) {
-        var query = "SELECT * FROM ??";
-        var table = ["Unit"];
-        query = mysql.format(query, table);
+        var query = "SELECT * FROM Unit";
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -126,9 +125,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 
 // GET UNIT BY ID
     router.get("/units/:unit_id", function(req, res) {
-        var query = "SELECT * FROM ?? WHERE ??=?";
-        var table = ["Unit", "unit_id", req.params.unit_id];
-        query = mysql.format(query, table);
+        var unit = req.params.unit_id;
+        var query = "SELECT * FROM Unit WHERE unit_id = " + unit;
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -141,9 +140,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 ///////// ACTIVITY /////////
 // POST
     router.post("/activities", function(req, res) {
-        var query = "INSERT INTO ??(??) VALUES (?)";
-        var table = ["Activity", "activity_id", req.body.activity];
-        query = mysql.format(query, table);
+        var activity = req.body.activity;
+        var query = "INSERT INTO Activity (activity_id) VALUES (" + activity + ")";
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -152,11 +151,11 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
             }
         });
     });
+
 // GET ALL ACTIVITY
     router.get("/activities", function(req, res) {
-        var query = "SELECT * FROM ??";
-        var table = ["Activity"];
-        query = mysql.format(query, table);
+        var query = "SELECT * FROM Activity";
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -168,9 +167,9 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 
 // GET ACTIVITY BY ID
     router.get("/activities/:activity_id", function(req, res) {
-        var query = "SELECT * FROM ?? WHERE ??=?";
-        var table = ["Activity", "activity_id", req.params.activity_id];
-        query = mysql.format(query, table);
+        var activity = req.params.activity_id;
+        var query = "SELECT * FROM Activity WHERE activity_id = " + activity;
+
         connection.query(query, function(err, rows) {
             if(err) {
                 res.status(400).json({"Message" : "Error executing MySQL query"});
@@ -202,12 +201,12 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
 
         //INSERT INTO Aggregate - user_id, product_id, -1, -1
         var query4 = "INSERT INTO Aggregate (user_id, product_id, time_on_activity_duration, score_count, score_sum, first_attempt_score, average_attempt_score, highest_attempt_score, last_attempt_score) VALUES(" + user + ", " + product + ", (SELECT SUM(A.time_on_activity_duration) FROM Aggregate A WHERE A.user_id =" + user + " AND A.product_id = " + product + " AND A.unit_id > 0 AND A.activity_id < 0), (SELECT SUM(B.score_count) FROM Aggregate B WHERE B.user_id =" + user + " AND B.product_id = " + product + " AND B.unit_id > 0 AND B.activity_id  < 0), (SELECT SUM(B.score_sum) FROM Aggregate B WHERE B.user_id =" + user + " AND B.product_id = " + product + " AND B.unit_id > 0 AND B.activity_id  < 0), " + score + ",  (SELECT AVG(C.average_attempt_score) FROM Aggregate C WHERE C.user_id =" + user + " AND C.product_id = " + product + " AND C.unit_id > 0 AND C.activity_id  < 0), (SELECT MAX(D.highest_attempt_score) FROM Aggregate D WHERE D.user_id =" + user + " AND D.product_id = " + product + " AND D.unit_id > 0 AND D.activity_id  < 0), " + score + ")\n ON DUPLICATE KEY UPDATE time_on_activity_duration = VALUES(time_on_activity_duration), score_sum = VALUES(score_sum), score_count =  VALUES(score_count), first_attempt_score = first_attempt_score, average_attempt_score = VALUES(average_attempt_score), highest_attempt_score = VALUES(highest_attempt_score), last_attempt_score =  VALUES(last_attempt_score);\n\n";
-            
+
         //INSERT INTO Aggregate - user_id, -1, -1, -1
         var query5 = "INSERT INTO Aggregate (user_id, time_on_activity_duration, score_count, score_sum, first_attempt_score, average_attempt_score, highest_attempt_score, last_attempt_score) VALUES(" + user + ", (SELECT SUM(A.time_on_activity_duration) FROM Aggregate A WHERE A.user_id =" + user + " AND A.product_id > 0 AND A.unit_id < 0 AND A.activity_id < 0), (SELECT SUM(B.score_count) FROM Aggregate B WHERE B.user_id =" + user + " AND B.product_id > 0 AND B.unit_id < 0 AND B.activity_id  < 0), (SELECT SUM(B.score_sum) FROM Aggregate B WHERE B.user_id =" + user + " AND B.product_id > 0 AND B.unit_id < 0 AND B.activity_id  < 0), " + score + ",  (SELECT AVG(C.average_attempt_score) FROM Aggregate C WHERE C.user_id =" + user + " AND C.product_id > 0 AND C.unit_id < 0 AND C.activity_id  < 0), (SELECT MAX(D.highest_attempt_score) FROM Aggregate D WHERE D.user_id =" + user + " AND D.product_id > 0 AND D.unit_id < 0 AND D.activity_id  < 0), " + score + ")\n ON DUPLICATE KEY UPDATE time_on_activity_duration = VALUES(time_on_activity_duration), score_sum = VALUES(score_sum), score_count =  VALUES(score_count), first_attempt_score = first_attempt_score, average_attempt_score = VALUES(average_attempt_score), highest_attempt_score = VALUES(highest_attempt_score), last_attempt_score =  VALUES(last_attempt_score);\n\n";
-            
+
         query = query1 + query2 + query3 + query4 + query5;
-        
+
         connection.query(query, function(err, rows) {
             if(err) {
                 console.log(err);
@@ -217,6 +216,7 @@ REST_ROUTER.prototype.handleRoutes= function(router, connection) {
             }
         });
     });
+
 // GET ALL RECORDS
     router.get("/records", function(req, res) {
         var query = "SELECT * FROM Aggregate";
