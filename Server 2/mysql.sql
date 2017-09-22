@@ -45,23 +45,18 @@ CREATE TABLE Record(
 
 DROP TABLE IF EXISTS `Aggregate`;
 CREATE TABLE Aggregate(
-	aggregate_id INT NOT NULL AUTO_INCREMENT,
 	user_id INT NOT NULL,
 	product_id INT default -1,
 	unit_id INT default -1,
 	activity_id INT default -1,
 	time_on_activity_duration INT NOT NULL,
 	score_count INT NOT NULL,
+	score_sum INT NOT NULL,
 	first_attempt_score INT NOT NULL,
 	average_attempt_score INT NOT NULL,
 	highest_attempt_score INT NOT NULL,
 	last_attempt_score INT NOT NULL,
-	PRIMARY KEY (aggregate_id),
-	UNIQUE KEY (user_id, product_id, unit_id, activity_id),
-	FOREIGN KEY (user_id) REFERENCES User(user_id),
-	FOREIGN KEY (product_id) REFERENCES Product(product_id),
-	FOREIGN KEY (unit_id) REFERENCES Unit(unit_id),
-	FOREIGN KEY (activity_id) REFERENCES Activity(activity_id)
+	PRIMARY KEY (user_id, product_id, unit_id, activity_id)
 );
 
 INSERT INTO Product (product_id) VALUES ('1');
