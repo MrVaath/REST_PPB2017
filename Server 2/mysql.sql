@@ -25,6 +25,7 @@ CREATE TABLE User(
 	user_id INT NOT NULL UNIQUE
 );
 
+DROP TABLE IF EXISTS `Record`;
 CREATE TABLE Record(
 	record_id INT NOT NULL AUTO_INCREMENT,
 	user_id INT NOT NULL,
@@ -42,12 +43,13 @@ CREATE TABLE Record(
 	FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
+DROP TABLE IF EXISTS `Aggregate`;
 CREATE TABLE Aggregate(
 	aggregate_id INT NOT NULL AUTO_INCREMENT,
 	user_id INT NOT NULL,
-	product_id INT default NULL,
-	unit_id INT default NULL,
-	activity_id INT default NULL,
+	product_id INT default -1,
+	unit_id INT default -1,
+	activity_id INT default -1,
 	time_on_activity_duration INT NOT NULL,
 	score_count INT NOT NULL,
 	first_attempt_score INT NOT NULL,
