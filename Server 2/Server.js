@@ -14,9 +14,9 @@ REST.prototype.connectMysql = function() {
     var pool      =    mysql.createPool({
         connectionLimit : 100,
         host     : 'mysql.wmi.amu.edu.pl',
-        user     : 's407333',
-        password : 'admin1234',
-        database : 's407333',
+        user     : 's407323',
+        password : 'kukurydza76',
+        database : 's407323_Bookshop',
         debug    :  false,
         multipleStatements: true
     });
