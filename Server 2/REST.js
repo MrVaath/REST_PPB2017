@@ -209,7 +209,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection) {
 
         connection.query(query, function(err, rows) {
             if(err) {
-                console.log(err);
+                console.log('\n\n\t\t-------- ERROR --------\n\n' + query + '\n\n' + err)
                 res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
                 res.status(201).json({"Message" : "Record Added!"});
@@ -222,6 +222,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection) {
         var query = "SELECT * FROM Aggregate";
         connection.query(query, function(err, rows) {
             if(err) {
+                console.log('\n\n\t\t-------- ERROR --------\n\n' + query + '\n\n' + err)
                 res.status(400).json({"Message" : "Error executing MySQL query"});
             } else {
                 res.status(200).json({"Message" : "Success", "Records" : rows});
