@@ -186,10 +186,9 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection) {
             product = req.body.product,
             unit = req.body.unit,
             activity = req.body.activity,
-            attempt = req.body.attempt,
             duration = req.body.duration,
             score = req.body.score;
-        var query = "INSERT INTO Record (product_id, unit_id, activity_id, user_id, attempt_run, time_on_activity_duration, score) VALUES (" + product + ", " + unit + ", " + activity + ", " + user + ", " + attempt + ", " + duration + ", " + score + ")";
+        var query = "INSERT INTO Record (product_id, unit_id, activity_id, user_id, attempt_run, time_on_activity_duration, score) VALUES (" + product + ", " + unit + ", " + activity + ", " + user + ", (SELECT COUNT(R.score) FROM Record R WHERE R.product_id = " + product + " AND R.unit_id = " + unit + " AND R.activity_id = " + activity + " AND R.user_id = " + user + "), " + duration + ", " + score + ")";
 
         connection.query(query, function(err, rows) {
             if(err) {
