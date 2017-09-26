@@ -191,7 +191,7 @@ REST_ROUTER.prototype.handleRoutes = function(router, connection) {
             score =     req.body.score;
 
         //INSERT INTO Record
-        var query1 = "INSERT INTO Record (product_id, unit_id, activity_id, user_id, attempt_run, time_on_activity_duration, score) VALUES(" + product + ", " + unit + ", " + activity + ", "  + user + ", " + attempt + ", " + duration + ", " + score + ");\n\n";
+        var query1 = "INSERT INTO Record (product_id, unit_id, activity_id, user_id, attempt_run, time_on_activity_duration, score) VALUES(" + product + ", " + unit + ", " + activity + ", "  + user + ", (SELECT COUNT(R.score) FROM Record R WHERE R.product_id = " + product + " AND R.unit_id = " + unit + " AND R.activity_id = " + activity + " AND R.user_id = " + user + "), " + duration + ", " + score + ");\n\n";
 
         //INSERT INTO Aggregate - user_id, product_id, unit_id, activity_id
         var query2 = "INSERT INTO Aggregate (user_id, product_id, unit_id, activity_id, time_on_activity_duration, score_count, score_sum, first_attempt_score, average_attempt_score, highest_attempt_score, last_attempt_score) VALUES(" + user + ", " + product + ", " + unit + ", " + activity + ", " + duration + ", " + 1 + ", " + score + ", " + score + ", " + score + ", " + score + ", " + score + ") ON DUPLICATE KEY UPDATE time_on_activity_duration = time_on_activity_duration + VALUES(time_on_activity_duration), score_count =  score_count + 1, score_sum = score_sum + VALUES(score_sum), first_attempt_score = first_attempt_score, average_attempt_score = (score_sum / score_count), highest_attempt_score = IF(highest_attempt_score < VALUES(highest_attempt_score), VALUES(highest_attempt_score), highest_attempt_score), last_attempt_score =  VALUES(last_attempt_score);\n\n";
